@@ -1,0 +1,68 @@
+
+server:
+  port: 9001
+  serverInfo: "dev"
+
+secret:
+  key: 46EBA22EF5204DD5B110A1F730513965 #??
+
+app:
+ #?????
+ env: jike:web:dev
+ # job是否开启
+ job:
+   enabled: false
+  # ???????????
+ generateFuntionAllowed: true
+ email:
+   sender: devjackcat@163.com
+spring:
+  profiles:
+    active: "@profileActive@"
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: true # ???????????
+      fail_on_empty_beans: false
+    mapper-locations: classpath*:mapper/*Mapper.xml
+  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/jikeing?characterEncoding=utf8
+#    username: root
+#    password: 7LgA7389E8XB
+
+    url: jdbc:mysql://jikeing.mysql.polardb.rds.aliyuncs.com:3306/jikeing?characterEncoding=utf8
+    username: jikeing
+    password: Vx#7LgA7389E8XB
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: "47.110.82.217"
+    password: "bp110p01v5y4vcvwiwM"
+    username: "default"
+
+#    host: '127.0.0.1'
+
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
+    redisson:
+      config:
+        singleServerConfig:
+          host: ${spring.redis.host}
+          port: ${spring.redis.port}
+          password: ${spring.redis.password}
+          username: ${spring.redis.username}
+          database: ${spring.redis.database}
+        threads: 0
+        nettyThreads: 0
+        transportMode: "NIO"
+
+sa-token:
+  # jwt秘钥
+  jwt-secret-key: 176d159ed780b7760784c8cbf4dc8c8d

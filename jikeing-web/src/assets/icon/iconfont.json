@@ -1,0 +1,37 @@
+{
+  "id": "2407844",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-ali",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "21394312",
+      "name": "待处理",
+      "font_class": "daichuli",
+      "unicode": "f4d7",
+      "unicode_decimal": 62679
+    },
+    {
+      "icon_id": "19663516",
+      "name": "更多",
+      "font_class": "more",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "19988937",
+      "name": "zoomout",
+      "font_class": "zoomout",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "19988940",
+      "name": "zoom",
+      "font_class": "zoom",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    }
+  ]
+}

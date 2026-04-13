@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2407844 */
+  src: url('iconfont.woff2?t=1621305278761') format('woff2'),
+       url('iconfont.woff?t=1621305278761') format('woff'),
+       url('iconfont.ttf?t=1621305278761') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 引入ali-icon */
+[class^="el-icon-ali"],
+[class*=" el-icon-ali"]
+{
+	font-family: "iconfont" !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	speak: none;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+  text-transform: none;
+  fill: currentColor;
+	line-height: 1;
+	vertical-align: baseline;
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+}
+
+.el-icon-alidaichuli:before {
+  content: "\f4d7";
+}
+
+.el-icon-alimore:before {
+  content: "\e663";
+}
+
+.el-icon-alizoomout:before {
+  content: "\e65d";
+}
+
+.el-icon-alizoom:before {
+  content: "\e65e";
+}
+

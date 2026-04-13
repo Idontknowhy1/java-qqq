@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.nano.NanoTaskHpMapper">
+
+    <sql id="selectComps">
+        select
+            create_time as createTime,
+            delete_time as deleteTime,
+            id as id,
+            refer_image as referImage,
+            result_image as resultImage,
+            status as status,
+            task_id as taskId,
+            third_task_id as thirdTaskId,
+            update_time as updateTime
+        from nano_tasks_hp
+    </sql>
+
+</mapper>

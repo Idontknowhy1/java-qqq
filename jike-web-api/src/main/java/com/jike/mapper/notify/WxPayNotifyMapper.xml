@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.notify.WxPayNotifyMapper">
+
+    <sql id="selectComps">
+        select
+            body as body,
+            create_time as createTime,
+            id as id,
+            orderNo as orderno,
+            transId as transid,
+            userId as userid
+        from tb_wx_pay_notifies
+    </sql>
+
+</mapper>

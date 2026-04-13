@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.bus.MaterialMapper">
+
+    <select id="pageList" parameterType="HashMap" resultType="com.jike.model.bus.MaterialVO">
+        SELECT CAST(a.id AS CHAR) as id,baidu_url,category_id,cover_image, FROM_UNIXTIME(a.create_time, '%Y-%m-%d %H:%i:%s') as create_time,details,intro,properties,a.sort,a.status,title,view_num, b.`name` as category_name
+        FROM materials a inner join material_categories b on a.`category_id` = b.id
+        <where>
+            <if test="categoryId > 0">
+                and a.category_id = #{categoryId}
+            </if>
+        </where>
+        ORDER BY a.sort asc
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="pageCount" parameterType="HashMap" resultType="Integer">
+        SELECT count(id) FROM materials         <where>
+        <if test="categoryId > 0">
+            and category_id = #{categoryId}
+        </if>
+    </where>
+    </select>
+
+</mapper>

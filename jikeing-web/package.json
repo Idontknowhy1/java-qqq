@@ -1,0 +1,43 @@
+{
+  "name": "jike-webui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite  --mode development",
+    "build": "vite build --mode production",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vueuse/core": "^14.0.0",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.11.0",
+    "cropperjs": "^2.0.1",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.10.7",
+    "jsencrypt": "^3.5.4",
+    "pinia": "^3.0.3",
+    "scss": "^0.2.4",
+    "scss-loader": "^0.0.1",
+    "sortablejs": "^1.15.6",
+    "tailwindcss": "^4.1.14",
+    "uuid": "^11.1.0",
+    "vue": "^3.5.18",
+    "vue-cropper": "^0.6.5",
+    "vue-cropperjs": "^5.0.0",
+    "vue-router": "^4.5.1",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "sass-embedded": "^1.90.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "vue-tsc": "^3.0.5"
+  }
+}

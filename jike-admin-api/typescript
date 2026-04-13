@@ -1,0 +1,91 @@
+Script started on Sat Oct 11 07:09:35 2025
+[1m[7m%[27m[1m[0m                                                                                                                                                                                ]2;jjs@jjsdeMacBook-Air:~/Documents/code/jike/jike-admin-api]1;..ike-admin-api]7;file://jjsdeMacBook-Air.local/Users/jjs/Documents/code/jike/jike-admin-api\[0m[27m[24m[J[01;32m➜  [36mjike-admin-api[00m [K[?1h=[?2004h[0m[27m[24m[J[01;32m➜  [36mjike-admin-api[00m [01;34mgit:([31mmain[34m) [33m✗[00m [Kccd scripts[1m/[0m[0m [?1l>[?2004l
+]2;cd scripts]1;cd[1m[7m%[27m[1m[0m                                                                                                                                                                                ]2;jjs@jjsdeMacBook-Air:~/Documents/code/jike/jike-admin-api/scripts]1;..n-api/scripts]7;file://jjsdeMacBook-Air.local/Users/jjs/Documents/code/jike/jike-admin-api/scripts\[0m[27m[24m[J[01;32m➜  [36mscripts[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004h../build_api_prod_01.sh[1m [0m[0m [?1l>[?2004l
+]2;./build_api_prod_01.sh]1;./build_api_prod_01.sh[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.jike:jike-admin-api[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding jike-admin-api 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m]   from pom.xml
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;33mWARNING[m] 2 problems were encountered while building the effective model for com.alibaba:druid:jar:1.1.9 during dependency collection step for project (use -X to see details)
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mclean:3.2.0:clean[m [1m(default-clean)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Deleting /Users/jjs/Documents/code/jike/jike-admin-api/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mresources:3.2.0:resources[m [1m(default-resources)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 9 resources
+[[1;34mINFO[m] Copying 4 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mcompiler:3.8.1:compile[m [1m(default-compile)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 85 source files to /Users/jjs/Documents/code/jike/jike-admin-api/target/classes
+[[1;34mINFO[m] /Users/jjs/Documents/code/jike/jike-admin-api/src/main/java/com/jjs/javacode/TableController.java: 某些输入文件使用了未经检查或不安全的操作。
+[[1;34mINFO[m] /Users/jjs/Documents/code/jike/jike-admin-api/src/main/java/com/jjs/javacode/TableController.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mresources:3.2.0:copy-resources[m [1m(copy-resources)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] Copying 2 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mresources:3.2.0:testResources[m [1m(default-testResources)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered properties files.
+[[1;34mINFO[m] skip non existing resourceDirectory /Users/jjs/Documents/code/jike/jike-admin-api/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mcompiler:3.8.1:testCompile[m [1m(default-testCompile)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32msurefire:2.22.2:test[m [1m(default-test)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] No tests to run.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjar:3.2.2:jar[m [1m(default-jar)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Building jar: /Users/jjs/Documents/code/jike/jike-admin-api/target/jike_admin_api_prod_01.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot:2.7.13:repackage[m [1m(repackage)[m @ [36mjike-admin-api[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact with repackaged archive
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  2.240 s
+[[1;34mINFO[m] Finished at: 2025-10-11T07:09:46+08:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[0m[0mjike_admin_api_prod_01.jar                                                                                                                      0%    0     0.0KB/s   --:-- ETAjike_admin_api_prod_01.jar                                                                                                                      0%  255KB 253.7KB/s   04:11 ETAjike_admin_api_prod_01.jar                                                                                                                      4% 2805KB 482.9KB/s   02:06 ETAjike_admin_api_prod_01.jar                                                                                                                     20%   13MB   1.4MB/s   00:35 ETAjike_admin_api_prod_01.jar                                                                                                                     35%   22MB   2.2MB/s   00:18 ETAjike_admin_api_prod_01.jar                                                                                                                     51%   32MB   3.0MB/s   00:10 ETAjike_admin_api_prod_01.jar                                                                                                                     66%   41MB   3.6MB/s   00:05 ETAjike_admin_api_prod_01.jar                                                                                                                    100%   63MB   9.3MB/s   00:06    
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.8.0-78-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sat Oct 11 07:09:47 AM CST 2025
+
+  System load:  0.1                Processes:             156
+  Usage of /:   22.8% of 39.01GB   Users logged in:       0
+  Memory usage: 70%                IPv4 address for eth0: 172.24.128.120
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+29 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+1 updates could not be installed automatically. For more details,
+see /var/log/unattended-upgrades/unattended-upgrades.log
+
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+ Container apiadmin-apiadmin-1  Restarting
+ Container apiadmin-apiadmin-1  Started
+[1m[7m%[27m[1m[0m                                                                                                                                                                                ]2;jjs@jjsdeMacBook-Air:~/Documents/code/jike/jike-admin-api/scripts]1;..n-api/scripts]7;file://jjsdeMacBook-Air.local/Users/jjs/Documents/code/jike/jike-admin-api/scripts\[0m[27m[24m[J[01;32m➜  [36mscripts[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004h

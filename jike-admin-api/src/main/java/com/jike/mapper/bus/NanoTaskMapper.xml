@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.bus.NanoTaskMapper">
+
+    <select id="adminPageList" parameterType="HashMap" resultType="com.jike.model.bus.NanoTaskVO">
+        SELECT a.id,a.create_time,a.delete_time,finish_time,latest_fail_reason,logs,model,prompt,refer_images,result_images,retry_num,size,status,third_task_id,a.update_time,user_id,
+        b.uuid,b.nickname
+        FROM nano_tasks a left join users b on a.user_id = b.id
+        <where>
+            a.status = 2 and a.model in ('nano-banana', 'banana2', 'gemini-2.5-flash-image')
+            <if test="uuid != null and uuid != ''">
+                and b.uuid = #{uuid}
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!-- 总记录数 -->
+    <select id="adminPageCount" parameterType="String" resultType="Integer">
+        SELECT count(a.id)
+        FROM nano_tasks a left join users b on a.user_id = b.id
+        <where>
+            a.status = 2 and a.model in ('nano-banana', 'banana2', 'gemini-2.5-flash-image')
+            <if test="uuid != null and uuid != ''">
+                and b.uuid = #{uuid}
+            </if>
+        </where>
+    </select>
+
+</mapper>

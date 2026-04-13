@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.user.UserMapper">
+
+    <sql id="selectComps">
+        select
+            ai_gen_member_expire_at as aiGenMemberExpireAt,
+            avatar as avatar,
+            baidu_uk as baiduUk,
+            create_time as createTime,
+            delete_time as deleteTime,
+            id as id,
+            image_split_member_expire_at as imageSplitMemberExpireAt,
+            material_member_expire_at as materialMemberExpireAt,
+            mobile as mobile,
+            nickname as nickname,
+            password as password,
+            plugin_member_expire_at as pluginMemberExpireAt,
+            roles as roles,
+            salt as salt,
+            update_time as updateTime,
+            username as username,
+            uuid as uuid,
+            vip_level as vipLevel
+        from users
+    </sql>
+
+</mapper>

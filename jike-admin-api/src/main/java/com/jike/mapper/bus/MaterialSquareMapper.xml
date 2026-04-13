@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.bus.MaterialSquareMapper">
+
+    <sql id="selectComps">
+        select
+            ass_id as assId,
+            create_time as createTime,
+            id as id,
+            image_url as imageUrl,
+            model as model,
+            name as name,
+            prompt as prompt,
+            refer_images as referImages,
+            size as size,
+            sort_index as sortIndex
+        from tb_material_square
+    </sql>
+
+</mapper>

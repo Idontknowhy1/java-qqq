@@ -1,0 +1,377 @@
+.detail {
+  position: relative;
+  border: 0px solid #ff0000;
+  height: 100vh;
+  background: #000;
+  .back {
+    border: 0px solid #fff;
+    color:#fff;
+    margin: 0px 0 0px 20px;
+    line-height: 40px;
+    font-size: 14px;
+    .img {
+      color:#fff;
+    }
+  }
+
+  .content {
+    position: relative;
+    background: #111226;
+    height: calc(100% - 50px);
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 6px;
+    color:#fff;
+    .content_box {
+      display: flex;
+      width: 90%;
+      margin: 0px auto;
+      padding: 30px 0 0 0;
+      .item {
+        height: 620px;
+        border: 0px solid #ff0000;
+        margin: 0 1.5% 0 0%;
+      }
+      .image_list {
+        width: 15%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        cursor: pointer;
+        img {
+          display: block;
+          width: 96%;
+          margin: 0 0 10px 0;
+          border: 0px solid #000;
+          border-radius: 6px;
+          background: #fff;
+        }
+      }
+      .image_info {
+        width: 35%;
+        //width: 460px;
+        overflow: hidden;
+        border: 0px solid #ff0000;
+        border-radius: 6px;
+        background:#fff;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        /*img {
+          display: block;
+          //width: 99%;
+          width: 460px;
+          height: 100% !important;
+          border-radius: 4px;
+          margin: 0 auto;
+          border: 0px solid #ff0000;
+        }*/
+        .el-image {
+          //height: 100%;
+          margin: 0 auto;
+          position: relative;
+          border:0px solid #000;
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            margin: 0 auto;
+            border: 0px solid #ff0000;
+            object-fit: cover;
+          }
+        }
+      }
+      .other_info {
+        width: 45%;
+        .name {
+          line-height: 40px;
+          font-size: 20px;
+          color:#fff;
+        }
+        .view_time {
+          font-size: 14px;
+          display: flex;
+          justify-content: flex-start;
+          border: 0px solid #ccc;
+          height: 24px;
+          line-height: 24px;
+          padding: 0 0 10px 0;
+          margin-left: 0px;
+          .time {
+            display: flex;
+            align-items: center;
+          }
+          .view_count {
+            display: flex;
+            align-items: center;
+            margin: 0 10px 0 10px;
+          }
+          .icon {
+            width: 14px;
+            //height: 14px;
+            margin: 0px;
+            max-width: 100%; /* 确保图片不会超出容器 */
+            height: auto;
+            display: block;
+          }
+        }
+
+        .material_info {
+          width: 100%;
+          height: 200px;
+          border: 0px solid #fff;
+          margin: 20px auto;
+          border-radius: 20px;
+          background: #1A1B2E;
+          padding: 10px 0;
+          .title {
+            line-height: 50px;
+            color:#fff;
+            font-size: 18px;
+            margin: 0 0 0 10px;
+          }
+          .item_box {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+            .item_list {
+              width: 47%;
+              margin: 10px 0 10px 10px;
+              .label {
+                margin: 6px 0 14px 0;
+                color: #9CA3AF;
+              }
+            }
+          }
+        }
+
+        .download_btn {
+          width: 100%;
+          //line-height: 40px;
+          border: 0px solid #fff;
+          margin: 26px 0 0 0;
+          display: flex;
+          flex-direction: column;
+          padding: 16px 0px;
+          gap: 0px 10px;
+          flex-wrap: wrap;
+          align-content: center;
+
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), linear-gradient(90deg, #2563EB 0%, #DB2777 100%);
+          text-align: center;
+          border-radius: 5px;
+          color:#fff;
+        }
+      }
+    }
+
+  }
+}
+
+.detail_old {
+  position: relative;
+  width: 98%;
+  height: auto;
+  background: #1F2937;//374151;
+  border-radius: 10px;
+  margin: 20px auto 0;
+  font-family: Roboto;
+  border: 0px solid #ff0000;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    .left {
+      width: 90%;
+      .title {
+        line-height: 60px;
+        font-size: 24px;
+        color: #fff;
+        margin: 0 0 0 20px;
+        .back {
+          width: 20px;
+          height: 20px;
+          margin: 0 14px 0 0;
+        }
+      }
+      .time_view {
+        display: flex;
+        margin: 0 0 0 20px;
+        color: #6B7280;
+        font-size: 14px;
+        img {
+          width: 16px;
+          //height: 20px;
+        }
+        .time {
+          display: flex;
+          margin: 0 10px 0 0;
+        }
+        .view_count {
+          display: flex;
+        }
+      }
+    }
+
+    .right {
+      width: 10%;
+      //line-height: 60px;
+      border: 0px solid #ff0000;
+      .price {
+        font-size: 20px;
+        color:#1B9AF5;
+        line-height: 40px;
+        text-align: right;
+        margin: 0 14px 0 0;
+      }
+      .btn {
+        text-align: right;
+        margin: 0 14px 0 0;
+        border: 0px solid #ff0000;
+      }
+    }
+  }
+
+  .image {
+    width: 98%;
+    height: 100%;
+    border: 0px solid #ff0000;
+    margin: 10px auto 0;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 44px;
+    letter-spacing: 0px;
+    color: #F3F4F6;
+    margin: 0 0 0 20px;
+    border: 0px solid #ff0000;
+  }
+
+  .text {
+    width:100%;
+    margin: 30px auto 0;
+    padding: 0 0 20px 0;
+    .content {
+      width:98%;
+      font-size: 14px;
+      font-weight: normal;
+      //line-height: 28px;
+      letter-spacing: 0px;
+      color: #D1D5DB;
+      margin: 0 auto;
+      border: 0px solid #ff0000;
+      img {
+        width: 100%;
+        height: 100%;
+        margin:0;
+        padding: 0;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .recommend {
+    width: 100%;
+    height: auto;
+    position: relative;
+    .content {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+/*      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+      grid-auto-rows: minmax(400px, auto);
+      grid-gap: 18px 18px;*/
+      //flex-direction:column;
+
+      margin: 0 0 20px 0px;
+      @media (max-width: 768px) {
+
+      }
+      .list {
+        width: 46%;
+        border: 0px solid #ff0000;
+        margin: 0 0 0 3%;
+        font-size: 14px;
+        .image {
+          width: 100%;
+          height: auto;
+          img {
+            width: 100%;
+            border-radius: 5px;
+          }
+        }
+
+        .name {
+          width: 100%;
+          color: #E5E7EB;
+          line-height: 30px;
+        }
+        .price {
+          color:#1B9AF5;
+        }
+      }
+    }
+  }
+
+  .comments {
+    width: 100%;
+    padding: 0 0 20px 0;
+    .content {
+      width: 100%;
+      .list {
+        width: 97%;
+        background: #374151;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 2px auto 18px;
+        .avatar {
+          width: 4.5%;
+          //height: 40px;
+          border: 0px solid #ff0000;
+          img {
+            width: 40px;
+            height: 40px;
+            margin: 8px 0 0 8px;
+          }
+        }
+        .nickname_content {
+          width: 95.5%;
+          color:#D1D5DB;
+          .nickname_star {
+            width: 100%;
+            line-height: 30px;
+            display: flex;
+            .nickname {
+              font-size: 14px;
+            }
+            .star {
+              display: flex;
+              justify-content: flex-start;
+              img {
+                width: 16px;
+                height: 16px;
+                margin: 8px 4px 0 4px;
+              }
+            }
+          }
+          .comment_content {
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0 0 8px 0;
+          }
+        }
+      }
+    }
+  }
+}

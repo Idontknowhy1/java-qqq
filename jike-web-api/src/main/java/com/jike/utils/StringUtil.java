@@ -1,0 +1,33 @@
+package com.jike.utils;
+
+import com.jike.redis.RedisCacheUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringUtil {
+    public static String unicodeDecode(String string) {
+        Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+        Matcher matcher = pattern.matcher(string);
+        char ch;
+        while (matcher.find()) {
+            ch = (char) Integer.parseInt(matcher.group(2), 16);
+            string = string.replace(matcher.group(1), ch + "");
+        }
+        return string;
+    }
+
+    /**
+     * 根据key获取完整路径
+     * @return
+     */
+    public static String absoulteString(String key) {
+        String qiniuPrefix = RedisCacheUtil.getConfigInfo("qiniuPrefix").toString();
+        if (qiniuPrefix.endsWith("/")) {
+            return qiniuPrefix + key;
+        } else {
+            return qiniuPrefix + "/" + key;
+        }
+    }
+
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.user.UserVipMapper">
+
+    <sql id="selectComps">
+        select
+            create_time as createTime,
+            expire_time as expireTime,
+            expired as expired,
+            expired_reason as expiredReason,
+            id as id,
+            last_assign_score_time as lastAssignScoreTime,
+            memo as memo,
+            price as price,
+            user_id as userId,
+            vip as vip
+        from tb_user_vip
+    </sql>
+
+</mapper>

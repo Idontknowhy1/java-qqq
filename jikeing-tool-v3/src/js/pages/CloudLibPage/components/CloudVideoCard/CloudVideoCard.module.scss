@@ -1,0 +1,35 @@
+$videoWidth: 120px;
+$videoHeight: calc($videoWidth * 3/4);
+
+.gridItem {
+    display: flex;
+    flex-direction: column;
+    width: $videoWidth;
+
+    .gridItemCoverWrapper {
+        position: relative;
+        width: $videoWidth;
+        height: $videoHeight;
+
+        .gridItemCoverVideo {
+            width: $videoWidth;
+            height: $videoHeight;
+            // background-color: #666666;
+        }
+
+        .girdItemAuthorRight {
+            position: absolute;
+            font-size: 10px;
+            bottom: 4px;
+            right: 4px;
+        }
+    }
+
+    .gridItemTitle {
+        margin-top: 8px;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

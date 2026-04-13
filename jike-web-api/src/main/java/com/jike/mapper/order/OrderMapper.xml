@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.order.OrderMapper">
+
+    <sql id="selectComps">
+        select
+            create_time as createTime,
+            goods_id as goodsId,
+            goods_price as goodsPrice,
+            id as id,
+            name as name,
+            order_no as orderNo,
+            out_trade_no as outTradeNo,
+            pay_price as payPrice,
+            sign as sign,
+            status as status,
+            user_id as userId
+        from tb_orders
+    </sql>
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+    <!-- 配置服务器认证信息 -->
+    <servers>
+        <server>
+            <id>2404658-snapshot-ybc7v2</id>
+            <username>64cb0084977bf7482be777c7</username>
+            <password><![CDATA[1J-BMO((q4n=]]></password>
+        </server>
+	<server>
+            <id>2404658-release-ybc7v2</id>
+            <username>64cb0084977bf7482be777c7</username>
+            <password><![CDATA[1J-BMO((q4n=]]></password>
+        </server>
+    </servers>
+
+    <!-- 配置仓库镜像 -->
+    <mirrors>
+        <mirror>
+            <id>mirror</id>
+            <mirrorOf>central,jcenter,!2404658-snapshot-ybc7v2</mirrorOf>
+            <name>mirror</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+        </mirror>
+    </mirrors>
+
+    <!-- 配置配置文件 -->
+    <profiles>
+        <profile>
+            <id>rdc</id>
+            <properties>
+                <!-- 请确认此值的格式是否符合阿里云效RDC的要求 -->
+                <altSnapshotDeploymentRepository>2404658-snapshot-ybc7v2::default::https://packages.aliyun.com/64cb0099132d10ed34af31bc/maven/2404658-snapshot-ybc7v2</altSnapshotDeploymentRepository>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 激活指定配置文件 -->
+    <activeProfiles>
+        <activeProfile>rdc</activeProfile>
+    </activeProfiles>
+</settings>

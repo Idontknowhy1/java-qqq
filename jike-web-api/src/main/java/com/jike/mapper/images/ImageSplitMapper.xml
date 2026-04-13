@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.images.ImageSplitMapper">
+
+    <sql id="selectComps">
+        select
+            create_time as createTime,
+            detail as detail,
+            id as id,
+            image_url as imageUrl,
+            result_url as resultUrl,
+            status as status,
+            title as title,
+            user_id as userId
+        from tb_image_split
+    </sql>
+
+</mapper>

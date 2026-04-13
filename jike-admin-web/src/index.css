@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* 最小宽度限制 - 小于768px时固定为16px */
+/* @media screen and (max-width: 768px) {
+  html {
+    font-size: 16px !important;
+  }
+} */
+
+/* 中间范围 - 768px到1920px之间按比例缩放 */
+/* @media screen and (min-width: 768px) and (max-width: 1440px) {
+  html {
+    font-size: calc(16px + (24 - 16) * (100vw - 768px) / (1440 - 768));
+  }
+} */
+
+body {
+  background-color: #f5f5f5;
+}
+
+/* 最大宽度限制 - 大于1920px时固定为24px */
+@media screen and (min-width: 1280px) {
+  html {
+    font-size: 128px !important;
+  }
+}

@@ -1,0 +1,12 @@
+
+.gridContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 16px;
+    padding-bottom: 0;
+    overflow-y: auto;
+    gap: 16px;
+}

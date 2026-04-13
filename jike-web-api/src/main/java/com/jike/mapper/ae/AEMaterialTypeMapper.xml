@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.ae.AEMaterialTypeMapper">
+
+    <sql id="selectComps">
+        select
+            id as id,
+            name as name,
+            order_index as orderIndex,
+            p_id as pId,
+            type as type
+        from tb_ae_plugin_material_types
+    </sql>
+
+</mapper>

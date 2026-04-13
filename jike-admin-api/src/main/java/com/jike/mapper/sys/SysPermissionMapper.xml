@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.sys.SysPermissionMapper">
+
+    <select id="getRoleMenus" parameterType="Integer">
+        select id, type, name, pid, code ,route from tb_permissions
+        where id in (select per_id from tb_rel_role_permission where role_id = #{roleId})
+          and type = 'MENU' and enable = 1
+        order by order_index asc
+    </select>
+
+    <select id="getRolePermissions" parameterType="Integer">
+        select id, code from tb_permissions
+        where enable = 1 and id in (select per_id from tb_rel_role_permission where role_id = #{roleId})
+        order by order_index asc
+    </select>
+
+
+</mapper>

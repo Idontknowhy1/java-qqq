@@ -1,0 +1,55 @@
+
+server:
+  port: 12006
+  serverInfo: "jike-prod-02"
+
+secret:
+  enabled: false #解密功能
+
+app:
+  #环境隔离标
+  env: jike:web:prod
+  # 代码生成方法是否被允许
+  generateFuntionAllowed: false
+  email:
+    sender: charley@tibol.com.cn
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: true # 时间返回格式改为时间戳
+      fail_on_empty_beans: false
+    mapper-locations: classpath*:mapper/*Mapper.xml
+  datasource:
+    url: jdbc:mysql://pc-bp1jji27rg6p654lf.mysql.polardb.rds.aliyuncs.com:3306/jikeing?characterEncoding=utf8
+    username: jikeing
+    password: Vx#7LgA7389E8XB
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: "redis"
+    port: 6379
+    password: "uf65q92q5d42auc1j4o@*&"
+    username: "r-uf6joc1j7xli2s76hr"
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
+    redisson:
+      config:
+        singleServerConfig:
+          host: ${spring.redis.host}
+          port: ${spring.redis.port}
+          password: ${spring.redis.password}
+          username: ${spring.redis.username}
+          database: ${spring.redis.database}
+        threads: 0
+        nettyThreads: 0
+        transportMode: "NIO"
+
+
+weixin:
+  # 商户API私钥路径
+  privateKeyPath: "/home/cers/wx/apiclient_key.pem"

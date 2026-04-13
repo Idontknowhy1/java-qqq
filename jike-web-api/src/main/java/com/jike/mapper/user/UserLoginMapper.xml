@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.user.UserLoginMapper">
+
+    <sql id="selectComps">
+        select
+            create_time as createTime,
+            delete_time as deleteTime,
+            id as id,
+            info as info,
+            type as type,
+            update_time as updateTime,
+            user_id as userId
+        from user_login
+    </sql>
+
+</mapper>

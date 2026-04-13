@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jike.mapper.score.UserScoreMapper">
+
+    <sql id="selectComps">
+        select
+            for_score as forScore,
+            id as id,
+            user_id as userId,
+            vip_score as vipScore
+        from tb_user_score
+    </sql>
+
+</mapper>

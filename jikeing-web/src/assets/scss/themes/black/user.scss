@@ -1,0 +1,296 @@
+.menu_content {
+  position: relative;
+  width: 160px;
+  //height: calc(100vh - 55px);
+  border-right: 1px solid #1F2937;
+  .info {
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+    img {
+      width: 50px;
+      height: 50px;
+    }
+    .open_member {
+      margin: 10px 0 0 0;
+    }
+  }
+  .menu_box {
+    width: 100%;
+    color:#fff;
+    font-size: 14px;
+    text-align:center;
+    margin: 10px 0 0 0;
+    .list {
+      line-height: 50px;
+      .text {
+        margin: 0 0px 0 8px;
+      }
+    }
+  }
+}
+
+.user_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color:#fff;
+  border: 0px solid #ff0000;
+  .user_right {
+    width: 96%;
+    margin: 0 0 0 4%;
+    border: 0px solid #ff0000;
+    .name {
+      font-size: 20px;
+      line-height: 50px;
+      margin: 16px 0 0 0;
+    }
+    .account_info {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0 0 20px 0;
+      .left,.right {
+        width: 45%;
+        border: 0px solid #ff0000;
+        margin: 0px 0 0 0;
+        .form_content {
+          width: 100%;
+          margin: 10px 0 0 0;
+          .form_item {
+            display: flex;
+            justify-content: flex-start;
+            .avatar {
+              width: 60px;
+              height: 60px;
+              border-radius: 50px;
+              margin: 20px 20px 0 40px;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .other {
+              .item_list {
+                margin: 0 0 4px 0;
+                .label {
+                  font-size: 14px;
+                  line-height: 26px;
+                }
+                .el-input__inner {
+                  background: #1F2937;
+                  border:none;
+                }
+              }
+            }
+
+            .baidupan {
+              margin: 0 0 0 40px;
+              line-height: 70px;
+              border: 0px solid #ff0000;
+              display: flex;
+              justify-content: flex-start;
+              .label {
+                margin: 0 14px 0 0;
+              }
+            }
+          }
+        }
+
+
+        .form_content_new_task {
+          .form_item {
+            width: 80%;
+            line-height: 56px;
+            display: flex;
+            justify-content: space-between;
+            background: #1F2937;
+            border-radius: 6px;
+            border: 0px solid #ff0000;
+            margin: 0 0 12px 0;
+            .left_item,.right_item {
+              width: 50%;
+              display: flex;
+              justify-content: flex-start;
+              margin: 0px 0 0px 4px;
+              padding: 0;
+              font-size: 14px;
+              .icon {
+                width: 14px;
+                height: 14px;
+                margin: 0 10px 0 10px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+            .right_item {
+              justify-content: flex-end;
+              .points {
+                color:#1B9AF5;
+              }
+              .btn {
+                margin: 0 10px;
+              }
+            }
+          }
+        }
+      }
+
+    }
+
+    .view_record {
+      width: 81%;
+      border: 0px solid #ff0000;
+      .view_record_box {
+        width: 100%;
+        margin: 6px 0 0 0;
+        .view_record_item {
+          display: flex;
+          justify-content: flex-start;
+          background: #1F2937;
+          border-radius: 10px;
+          margin: 10px 0 ;
+          .image {
+            width: 288px;
+            height: 164.56px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            margin: 0 30px 0 0;
+            img {
+              width: 100%;
+              height: 100%;
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+            }
+          }
+          .title {
+            font-size: 16px;
+            margin: 20px 0 20px 0 ;
+          }
+          .time {
+            font-size: 14px;
+            color:#6B7280;
+            margin: 0 0 20px 0 ;
+          }
+        }
+      }
+    }
+
+    .collect_item {
+      .title {
+        font-size: 16px;
+        margin: 10px 0 0 0;
+      }
+      .collect_box {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .item_list {
+          width: 380px;
+          height: 290px;
+          background: #1F2937;
+          border: 0px solid #ff0000;
+          color:#fff;
+          margin: 16px 16px 0 0;
+          border-radius: 6px;
+          .image {
+            width: 380px;
+            height: 200px;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 5px;
+            }
+          }
+          .title {
+            font-size: 16px;
+            margin: 20px 20px 10px 20px;
+          }
+          .collect_view {
+            display: flex;
+            justify-content: flex-start;
+            .collect_info,.view_info {
+              display: flex;
+              justify-content: flex-start;
+              font-size: 14px;
+              margin: 10px 0px 10px 20px;
+              color:#9E9E9E;
+              .icon {
+                width: 13px;
+                height:13px;
+                img {
+                  width: 100%;
+                  height:100%;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+
+    .material_item {
+      margin: 30px 0 20px 0;
+      .title {
+        font-size: 16px;
+        margin: 10px 0 0 0;
+      }
+      .material_box {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .item_list {
+          width: 280px;
+          height: 366px;
+          background: #1F2937;
+          border: 0px solid #ff0000;
+          color:#fff;
+          margin: 16px 16px 0 0;
+          border-radius: 6px;
+          .image {
+            width: 280px;
+            height: 280px;
+            overflow: hidden;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 5px;
+            }
+          }
+          .title {
+            font-size: 16px;
+            margin: 18px 20px 10px 20px;
+          }
+          .collect_view {
+            display: flex;
+            justify-content: flex-start;
+            .collect_info,.view_info {
+              display: flex;
+              justify-content: flex-start;
+              font-size: 14px;
+              margin: 8px 0px 10px 20px;
+              color:#9E9E9E;
+              .icon {
+                width: 13px;
+                height:13px;
+                img {
+                  width: 100%;
+                  height:100%;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+
+  }
+
+}

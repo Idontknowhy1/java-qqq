@@ -1,0 +1,82 @@
+[
+  {
+    "title": "攻击特效",
+    "type": "folder",
+    "id": 33,
+    "children": []
+  },
+  {
+    "title": "防御特效",
+    "id": 1,
+    "type": "folder",
+    "children": []
+  },
+  {
+    "title": "氛围特效",
+    "type": "folder",
+    "id": 2,
+    "children": [
+      {
+        "title": "爆炸",
+        "id": 21,
+        "type": "folder",
+        "children": []
+      },
+      {
+        "title": "大气出场",
+        "id": 22,
+        "type": "folder",
+        "children": []
+      },
+      {
+        "title": "氛围叠层",
+        "id": 23,
+        "type": "folder",
+        "children": []
+      },
+      {
+        "title": "实体叠层",
+        "id": 24,
+        "type": "folder",
+        "children": []
+      },
+      {
+        "title": "实体特效",
+        "id": 25,
+        "type": "folder",
+        "children": []
+      },
+      {
+        "title": "虚空",
+        "type": "folder",
+        "id": 26,
+        "children": []
+      },
+      {
+        "title": "烟雾",
+        "type": "folder",
+        "id": 27,
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "防御特效",
+    "type": "folder",
+    "id": 3,
+    "children": [
+      {
+        "title": "能量爆炸",
+        "type": "folder",
+        "id": 31,
+        "children": []
+      },
+      {
+        "title": "蓄力",
+        "type": "folder",
+        "id": 32,
+        "children": []
+      }
+    ]
+  }
+]
