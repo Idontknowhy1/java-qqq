@@ -344,6 +344,93 @@ public class UserScoreService extends AppBaseServiceV2<UserScoreEntity, UserScor
     }
 
     /**
+     * 更新用户 VIP 积分（增加或减少）
+     * @param userId 用户ID
+     * @param vipScoreDelta VIP积分变化量，正数增加，负数减少
+     * @return 更新结果，包含操作记录
+     * @throws Exception 当余额不足（减少时会导致负数）或操作失败时
+     */
+    public UserScoreUpdateResult updateVipScore(long userId, long vipScoreDelta) throws Exception {
+        UserScoreUpdateResult result = new UserScoreUpdateResult();
+
+        RLock lock = LockUtil.getLock("user:vip-score:" + userId);
+        try {
+            if (!lock.tryLock(30, TimeUnit.SECONDS)) {
+                log.error("更新 VIP 积分时获取分布式锁失败", new Exception("获取分布式锁失败"));
+                throw new Exception("系统繁忙，请稍后再试");
+            }
+
+            // 0. 校验用户是否存在，避免外键约束异常被吞成“系统错误”
+            UserEntity userEntity = userMapper.selectOne(new QueryWrapper<UserEntity>().lambda()
+                    .eq(UserEntity::getId, userId));
+            if (userEntity == null) {
+                throw new Exception("用户不存在");
+            }
+
+            // 1. 获取用户积分信息
+            UserScoreEntity userScoreEntity = mapper.selectOne(new QueryWrapper<UserScoreEntity>().lambda()
+                    .eq(UserScoreEntity::getUserId, userId));
+            if (userScoreEntity == null) {
+                userScoreEntity = new UserScoreEntity();
+                userScoreEntity.setUserId(userId);
+                userScoreEntity.setVipScore(0);
+                userScoreEntity.setForScore(0);
+            }
+
+            // 2. 计算新的 VIP 积分余额
+            long newVipScore = userScoreEntity.getVipScore() + vipScoreDelta;
+
+            // 3. 验证余额不为负数
+            if (newVipScore < 0) {
+                throw new Exception("VIP 积分余额不足，当前余额：" + userScoreEntity.getVipScore() + "，无法减少 " + Math.abs(vipScoreDelta));
+            }
+
+            // 4. 创建审计记录
+            UserScoreRecordEntity userScoreRecordEntity = new UserScoreRecordEntity();
+            userScoreRecordEntity.setUserId(userId);
+            
+            // 根据操作方向设置操作类型
+            if (vipScoreDelta > 0) {
+                userScoreRecordEntity.setType(UserScoreUpdateEnum.ADMIN_ADD_VIP.getValue());
+                userScoreRecordEntity.setMemo("用户手动增加 VIP 积分 " + vipScoreDelta);
+                userScoreRecordEntity.setVipScore(vipScoreDelta);
+            } else {
+                userScoreRecordEntity.setType(UserScoreUpdateEnum.CONSUME.getValue());
+                userScoreRecordEntity.setMemo("用户手动减少 VIP 积分 " + Math.abs(vipScoreDelta));
+                // 统一记录“消费数量”为正数，和现有消费流水语义保持一致
+                userScoreRecordEntity.setVipScore(Math.abs(vipScoreDelta));
+            }
+
+            userScoreRecordEntity.setForScore(0);
+            userScoreRecordEntity.setVipBalanceScore(newVipScore);
+            userScoreRecordEntity.setForBalanceScore(userScoreEntity.getForScore());
+
+            // 5. 更新用户积分记录
+            userScoreEntity.setVipScore(newVipScore);
+            result.setRecord(userScoreRecordEntity);
+
+            // 6. 保存入库
+            userScoreRecordMapper.insert(userScoreRecordEntity);
+            if (userScoreEntity.getId() > 0) {
+                mapper.updateById(userScoreEntity);
+            } else {
+                mapper.insert(userScoreEntity);
+            }
+
+            return result;
+
+        } catch (Exception ex) {
+            log.error("更新 VIP 积分失败，userId=" + userId + ", vipScoreDelta=" + vipScoreDelta, ex);
+            throw ex;
+        } finally {
+            // 确保无论如何都释放锁
+            if (lock.isHeldByCurrentThread()) {
+                lock.unlock();
+            }
+        }
+    }
+
+    /**
      * Job: 用户分配积分
      */
     public void assignUserScore(UserVipEntity userVip) {

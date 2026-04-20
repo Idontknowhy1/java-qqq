@@ -1,0 +1,259 @@
+### 用户积分系统 API 测试文件
+### 项目：jike-web-api
+### 接口版本：v1
+### 说明：测试 VIP 积分增减接口
+
+### ====================================
+### 配置信息
+### ====================================
+
+@baseUrl = http://localhost:9001
+@contentType = application/json
+
+### 用户认证信息
+### 获取方式：完成登录后，从响应中复制 token
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpb3QtYXBwLXNlcnZlciIsInN1YiI6IjIwNDExNDAwMjE5MzQxMzczNDQiLCJhdWQiOlsiaW90LWFwcCJdLCJleHAiOjE3ODEyNjI3NDEsImlhdCI6MTc3NjA3ODc0MSwianRpIjoiMTI4Y2Q4YjAtMzBkMS00OWQyLTgzNTktYTBkZjBmN2VmN2FiIiwiZGV2aWNlSWQiOiIifQ.bPD1xrpdnAeukK5-gFDD8jqZKDfPd7sqr54ad39JvwU
+@userId = 2041140021934137344
+
+### 测试用例的用户 ID（可根据实际情况修改）
+@testUserId = 2041140021934137344
+@addVipScore = 100
+@subtractVipScore = 50
+@excessiveSubtractScore = 999999
+
+### ====================================
+### 1. 积分查询接口
+### ====================================
+
+### 1.1 查询用户积分余额（用于验证当前状态）
+GET {{baseUrl}}/userscore/v1/balance-info
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+###
+
+### ====================================
+### 2. VIP 积分增加测试
+### ====================================
+
+### 2.1 增加 100 VIP 积分 - 正常场景
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": {{addVipScore}}
+}
+
+###
+
+### 2.2 增加 500 VIP 积分
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": 500
+}
+
+###
+
+### ====================================
+### 3. VIP 积分减少测试
+### ====================================
+
+### 3.1 减少 50 VIP 积分 - 正常场景
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": {{subtractVipScore}}
+}
+
+###
+
+### 3.2 减少 200 VIP 积分
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": -200
+}
+
+###
+
+### ====================================
+### 4. 错误场景测试
+### ====================================
+
+### 4.1 余额不足 - 尝试减少超大数值
+### 预期：返回错误信息 "VIP 积分余额不足"
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": -{{excessiveSubtractScore}}
+}
+
+###
+
+### 4.2 VIP 积分变化量为 0 - 参数验证失败
+### 预期：返回参数错误信息
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": 0
+}
+
+###
+
+### 4.3 缺少 userId 参数 - 参数验证失败
+### 预期：返回参数错误信息
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "vipScoreDelta": 100
+}
+
+###
+
+### 4.4 userId 为负数 - 参数验证失败
+### 预期：返回参数错误信息
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": -1,
+  "vipScoreDelta": 100
+}
+
+###
+
+### 4.5 缺少 token - 认证失败
+### 预期：返回认证失败信息
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": 100
+}
+
+###
+
+### 4.6 token 无效 - 认证失败
+### 预期：返回认证失败信息
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: invalid_token
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": 100
+}
+
+###
+
+### ====================================
+### 5. 大数值测试
+### ====================================
+
+### 5.1 增加大额 VIP 积分 (10000)
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": 10000
+}
+
+###
+
+### 5.2 减少大额 VIP 积分 (5000)
+POST {{baseUrl}}/userscore/v1/update-vip-score
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+{
+  "userId": {{testUserId}},
+  "vipScoreDelta": -5000
+}
+
+###
+
+### ====================================
+### 6. 积分查询 - 验证最终状态
+### ====================================
+
+### 6.1 查询最终的用户积分余额
+GET {{baseUrl}}/userscore/v1/balance-info
+Content-Type: {{contentType}}
+x-token: {{token}}
+X-User-Id: {{userId}}
+
+###
+
+### ====================================
+### 使用说明
+### ====================================
+###
+### 1. 在 VS Code 中安装 REST Client 扩展（ES128 REST Client）
+### 2. 修改顶部的配置信息：
+###    - @baseUrl：根据实际服务器地址修改（默认 localhost:8080）
+###    - @token：登录后从响应中复制实际的 token
+###    - @userId：当前登录用户的 ID
+###    - @testUserId：要测试的目标用户 ID（可与 userId 相同）
+### 
+### 3. 点击每个请求前的 "Send Request" 链接执行测试
+### 4. 在右侧面板查看响应结果
+###
+### 期望的成功响应格式：
+### {
+###   "code": 10000,
+###   "msg": "成功",
+###   "data": {
+###     "id": 1,
+###     "userId": 123,
+###     "type": "ADMIN_ADD_VIP",
+###     "vipScore": 100,
+###     "forScore": 0,
+###     "vipBalanceScore": 600,
+###     "forBalanceScore": 0,
+###     "memo": "用户手动增加 VIP 积分 100",
+###     "createTime": 1713618000
+###   }
+### }
+###
+### 期望的错误响应格式：
+### {
+###   "code": 99999,
+###   "msg": "VIP 积分余额不足，当前余额：100，无法减少 500",
+###   "data": null
+### }
