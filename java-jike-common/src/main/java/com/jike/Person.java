@@ -8,4 +8,3 @@ import lombok.Setter;
 public class Person {
     private int userId;
 }
-1

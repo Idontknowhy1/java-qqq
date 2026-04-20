@@ -1,0 +1,509 @@
+### 积分系统 API 测试文件
+### 项目：jike-admin-api
+### 服务器：http://localhost:9005
+
+@baseUrl = http://localhost:9005
+@json = application/json
+
+### 登录后请将 token 粘贴到这里
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjUsInJuU3RyIjoiVGlGUm5RblEyM1kzTHpkdDdibk1BVzh2VFhFMkpFNlciLCJyb2xlSWQiOjN9.XE2ulcYZkWKxXhhOg3oZIB2X_A4EpJ7jbwGx4lPqhe0
+
+### 常用测试参数（按你的环境调整）
+@userUuid = fi9vr15ty8e8
+@toUserId = 1
+@roleId = 1
+@permissionId = 1
+@goodsId = 1
+@orderId = 1
+@materialId = 1
+@bannerId = 1
+@dictType = material_category
+@imageSplitId = 1
+@accountId = 1
+
+### ====================================
+### 0. 认证与登录
+### ====================================
+
+### 0.1 管理端登录（获取 token）
+POST {{baseUrl}}/sysaccount/v1/login
+Content-Type: {{json}}
+
+{
+	"account": "xiaoq",
+	"password": "123456"
+}
+
+###
+
+### 0.2 管理端退出登录
+GET {{baseUrl}}/sysaccount/v1/logout
+x-token: {{token}}
+
+###
+
+### 0.3 修改当前账号密码
+POST {{baseUrl}}/sysaccount/v1/changePwd
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"oldPwd": "123456",
+	"newPwd": "12345678"
+}
+
+###
+
+### ====================================
+### 1. 用户与权限
+### ====================================
+
+### 1.1 获取当前用户信息
+GET {{baseUrl}}/user/v1/info
+x-token: {{token}}
+
+###
+
+### 1.2 根据 UUID 获取会员信息
+GET {{baseUrl}}/user/v1/get-member-info-by-uuid?uuid={{userUuid}}
+x-token: {{token}}
+
+###
+
+### 1.3 给用户添加会员
+GET {{baseUrl}}/user/v1/add-vip?toUserId={{toUserId}}&vipTag=VIP_LV01
+x-token: {{token}}
+
+###
+
+### 1.4 获取当前账号菜单与权限（返回加密串）
+GET {{baseUrl}}/syspermission/v1/userPermissions
+x-token: {{token}}
+
+###
+
+### 1.5 查询角色已有权限 ID 列表
+GET {{baseUrl}}/syspermission/v1/rolePermissions?roleId={{roleId}}
+x-token: {{token}}
+
+###
+
+### 1.6 更新角色权限
+POST {{baseUrl}}/syspermission/v1/updateRolePermission
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"roleId": {{roleId}},
+	"permissionIds": [{{permissionId}}]
+}
+
+###
+
+### 1.7 权限列表
+GET {{baseUrl}}/syspermission/v1/list
+x-token: {{token}}
+
+###
+
+### 1.8 保存权限
+POST {{baseUrl}}/syspermission/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"type": "MENU",
+	"name": "测试菜单",
+	"pid": 0,
+	"code": "test-menu",
+	"route": "/test-menu",
+	"orderIndex": 99,
+	"enable": true
+}
+
+###
+
+### 1.9 删除权限
+GET {{baseUrl}}/syspermission/v1/delete?id={{permissionId}}
+x-token: {{token}}
+
+###
+
+### ====================================
+### 2. 系统管理（角色/账号/配置）
+### ====================================
+
+### 2.1 角色列表
+GET {{baseUrl}}/sysrole/v1/list
+x-token: {{token}}
+
+###
+
+### 2.2 保存角色
+POST {{baseUrl}}/sysrole/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"name": "测试角色",
+	"disabled": false
+}
+
+###
+
+### 2.3 删除角色
+GET {{baseUrl}}/sysrole/v1/delete?id={{roleId}}
+x-token: {{token}}
+
+###
+
+### 2.4 账号列表
+GET {{baseUrl}}/sysaccount/v1/list?pageNum=1&pageSize=20
+x-token: {{token}}
+
+###
+
+### 2.5 保存账号
+POST {{baseUrl}}/sysaccount/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"account": "test_admin",
+	"password": "123456",
+	"roleId": {{roleId}},
+	"locked": false,
+	"memo": "测试账号"
+}
+
+###
+
+### 2.6 账号详情
+GET {{baseUrl}}/sysaccount/v1/detail?id={{accountId}}
+x-token: {{token}}
+
+###
+
+### 2.7 删除账号
+GET {{baseUrl}}/sysaccount/v1/delete?id={{accountId}}
+x-token: {{token}}
+
+###
+
+### 2.8 获取系统配置
+GET {{baseUrl}}/sysconfig/v1/getconfig
+x-token: {{token}}
+
+###
+
+### 2.9 保存系统配置
+POST {{baseUrl}}/sysconfig/v1/saveconfig
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"aeUrl": "https://example.com/ae-service"
+}
+
+###
+
+### 2.10 初始化权限与超级管理员（谨慎使用，通常只执行一次）
+GET {{baseUrl}}/sysinitpermission/init
+
+###
+
+### ====================================
+### 3. 积分与人员
+### ====================================
+
+### 3.1 获取用户积分信息
+GET {{baseUrl}}/userscore/v1/get-user-score?uuid={{userUuid}}
+x-token: {{token}}
+
+###
+
+### 3.2 管理员为用户添加积分
+GET {{baseUrl}}/userscore/v1/add-score?toUserId={{toUserId}}&score=100
+x-token: {{token}}
+
+###
+
+### 3.3 获取积分配置
+GET {{baseUrl}}/userscore/v1/get-score-config
+x-token: {{token}}
+
+###
+
+### 3.4 获取人员分页列表
+GET {{baseUrl}}/person/v1/page-list?pageNum=1&pageSize=10
+x-token: {{token}}
+
+###
+
+### 3.5 获取人员列表
+GET {{baseUrl}}/person/v1/list?pageNum=1&pageSize=100
+x-token: {{token}}
+
+###
+
+### 3.6 保存人员（父类默认 save，当前控制器已开启）
+POST {{baseUrl}}/person/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"name": "测试人员"
+}
+
+###
+
+### 3.7 删除人员（父类默认 delete，当前控制器已开启）
+GET {{baseUrl}}/person/v1/delete?id=1
+x-token: {{token}}
+
+###
+
+### ====================================
+### 4. 商品与订单
+### ====================================
+
+### 4.1 商品分页
+GET {{baseUrl}}/goods/v1/page-list?pageNum=1&pageSize=10
+x-token: {{token}}
+
+###
+
+### 4.2 商品列表
+GET {{baseUrl}}/goods/v1/list?pageNum=1&pageSize=100
+x-token: {{token}}
+
+###
+
+### 4.3 保存商品（父类默认 save，当前控制器已开启）
+POST {{baseUrl}}/goods/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"name": "测试商品",
+	"description": "商品描述",
+	"goodsTag": "VIP_LV01",
+	"orderIndex": 1,
+	"price": 9.9,
+	"showLimitTag": false,
+	"type": 1,
+	"disabled": false
+}
+
+###
+
+### 4.4 删除商品（父类默认 delete，当前控制器已开启）
+GET {{baseUrl}}/goods/v1/delete?id={{goodsId}}
+x-token: {{token}}
+
+###
+
+### 4.5 用户已支付订单查询
+GET {{baseUrl}}/order/v1/user-payed-order-list?uuid={{userUuid}}&orderNo=
+x-token: {{token}}
+
+###
+
+### 4.6 订单分页查询
+GET {{baseUrl}}/order/v1/page-list?pageNum=1&pageSize=10&userUUID=&goodsId=0&orderNo=&status=2&beginTime=0&endTime=0
+x-token: {{token}}
+
+###
+
+### 4.7 订单详情（父类 detail）
+GET {{baseUrl}}/order/v1/detail?id={{orderId}}
+x-token: {{token}}
+
+###
+
+### ====================================
+### 5. 业务数据（素材/广场/任务/审核）
+### ====================================
+
+### 5.1 素材分页
+GET {{baseUrl}}/materials/v1/page-list?pageNum=1&pageSize=10&categoryId=0
+x-token: {{token}}
+
+###
+
+### 5.2 素材详情
+GET {{baseUrl}}/materials/v1/detail?id={{materialId}}
+x-token: {{token}}
+
+###
+
+### 5.3 保存素材
+POST {{baseUrl}}/materials/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"title": "测试素材",
+	"intro": "素材简介",
+	"details": "素材详情",
+	"coverImage": "https://example.com/cover.jpg",
+	"baiduUrl": "https://pan.baidu.com/s/xxxx",
+	"properties": "{\"type\":\"psd\"}",
+	"status": "ENABLE",
+	"sort": 1,
+	"viewNum": 0,
+	"categoryId": 1
+}
+
+###
+
+### 5.4 删除素材
+GET {{baseUrl}}/materials/v1/delete?id={{materialId}}
+x-token: {{token}}
+
+###
+
+### 5.5 素材广场分页
+GET {{baseUrl}}/materialsquare/v1/page-list?pageNum=1&pageSize=10
+x-token: {{token}}
+
+###
+
+### 5.6 保存素材广场
+POST {{baseUrl}}/materialsquare/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"assId": 1001,
+	"name": "广场作品",
+	"model": "sdxl",
+	"prompt": "a cat in cyberpunk city",
+	"size": "1024x1024",
+	"imageUrl": "https://example.com/result.png",
+	"referImages": "[]",
+	"sortIndex": 1
+}
+
+###
+
+### 5.7 删除素材广场
+GET {{baseUrl}}/materialsquare/v1/delete?id=1
+x-token: {{token}}
+
+###
+
+### 5.8 Nano 任务分页
+GET {{baseUrl}}/nanotasks/v1/page-list?pageNum=1&pageSize=10&uuid={{userUuid}}
+x-token: {{token}}
+
+###
+
+### 5.9 图片拆分审核分页
+GET {{baseUrl}}/imagesplit/v1/page-list?pageNum=1&pageSize=10
+x-token: {{token}}
+
+###
+
+### 5.10 更新图片拆分审核状态
+POST {{baseUrl}}/imagesplit/v1/update-state
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": {{imageSplitId}},
+	"state": "PASS",
+	"resultUrl": "https://example.com/split-result.zip",
+	"reason": "审核通过"
+}
+
+###
+
+### ====================================
+### 6. 基础数据（Banner / 字典）
+### ====================================
+
+### 6.1 Banner 列表
+GET {{baseUrl}}/banners/v1/list?pageNum=1&pageSize=20
+x-token: {{token}}
+
+###
+
+### 6.2 保存 Banner
+POST {{baseUrl}}/banners/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"title": "测试Banner",
+	"image": "https://example.com/banner.jpg",
+	"link": "https://example.com",
+	"status": "ENABLE",
+	"sort": "1",
+	"deleteTime": 0
+}
+
+###
+
+### 6.3 删除 Banner
+GET {{baseUrl}}/banners/v1/delete?id={{bannerId}}
+x-token: {{token}}
+
+###
+
+### 6.4 字典类型列表
+GET {{baseUrl}}/dicts/v1/type-list
+x-token: {{token}}
+
+###
+
+### 6.5 字典明细列表
+GET {{baseUrl}}/dicts/v1/detail-list?type={{dictType}}
+x-token: {{token}}
+
+###
+
+### 6.6 保存字典类型
+POST {{baseUrl}}/dicts/v1/save
+Content-Type: {{json}}
+x-token: {{token}}
+
+{
+	"id": 0,
+	"code": "test_type",
+	"name": "测试字典类型"
+}
+
+###
+
+### 6.7 删除字典类型
+GET {{baseUrl}}/dicts/v1/delete?id=1
+x-token: {{token}}
+
+###
+
+### ====================================
+### 7. 工具接口
+### ====================================
+
+### 7.1 OSS 直传策略
+GET {{baseUrl}}/oss/policy
+x-token: {{token}}
+
+###
+
+### 7.2 OSS STS Token（当前实现为占位返回）
+GET {{baseUrl}}/oss/sts-token
+x-token: {{token}}
+
+###
+
+
