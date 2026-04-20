@@ -52,3 +52,6 @@ application-my.yaml
 
 /supermarket-ui-app/unpackage/
 **/.DS_Store
+
+# 忽略所有目录下的 node_modules
+**/node_modules/

@@ -11,6 +11,14 @@ export default defineConfig({
     host: "0.0.0.0", // 明确指定为本地回环地址
     port: 5175, // 确保端口未被占用
     open: true, // 启动后自动在浏览器中打开（可选，通常在本机）
+    proxy: {
+      "/api": {
+        target: "https://api-admin.jikeing.com",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 
   resolve: {
