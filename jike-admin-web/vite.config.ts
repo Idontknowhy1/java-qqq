@@ -13,7 +13,7 @@ export default defineConfig({
     open: true, // 启动后自动在浏览器中打开（可选，通常在本机）
     proxy: {
       "/api": {
-        target: "https://api-admin.jikeing.com",
+        target: process.env.VITE_API_PROXY_TARGET || "http://localhost:9005",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
