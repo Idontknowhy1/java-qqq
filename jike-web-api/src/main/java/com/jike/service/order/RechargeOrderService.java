@@ -138,15 +138,7 @@ public class RechargeOrderService extends AppBaseServiceV2<RechargeOrderEntity, 
             return ApiResponseUtil.getApiResponseFailure("订单不存在");
         }
 
-        // 如果已支付，直接返回
-        if ("PAID".equals(order.getStatus())) {
-            Map<String, Object> result = new HashMap<>();
-            result.put("orderId", orderId);
-            result.put("status", order.getStatus());
-            return ApiResponseUtil.getApiResponseSuccess(result);
-        }
-
-        // 查询微信支付状态
+        // 强制查询微信支付状态，确保状态同步
         WechatPayV3Client.QueryOrderResult queryResult = wechatPayV3Client.queryOrderByOutTradeNo(orderId);
         String tradeState = queryResult.getTradeState() != null ? queryResult.getTradeState() : queryResult.getError();
 
