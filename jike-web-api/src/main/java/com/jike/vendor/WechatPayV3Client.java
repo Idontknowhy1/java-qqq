@@ -111,13 +111,19 @@ public class WechatPayV3Client {
             String response = request("GET", urlPath, null);
             log.info("查询微信订单响应: {}", response);
             // 解析 trade_state
-            if (response.contains("\"trade_state\"")) {
-                int start = response.indexOf("\"trade_state\"") + 14;
-                int end = response.indexOf("\"", start);
-                result.setTradeState(response.substring(start, end));
-            } else {
-                log.warn("响应中未包含 trade_state: {}", response);
-                result.setError("响应中未包含 trade_state");
+            try {
+                JSONObject jsonObject = JSON.parseObject(response);
+                if (jsonObject.containsKey("trade_state")) {
+                    String tradeState = jsonObject.getString("trade_state");
+                    result.setTradeState(tradeState);
+                    log.info("解析出 trade_state: {}", tradeState);
+                } else {
+                    log.warn("响应中未包含 trade_state: {}", response);
+                    result.setError("响应中未包含 trade_state");
+                }
+            } catch (Exception e) {
+                log.error("解析微信订单响应失败", e);
+                result.setError("解析响应失败: " + e.getMessage());
             }
         } catch (Exception e) {
             log.error("查询微信订单失败", e);

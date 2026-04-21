@@ -138,6 +138,16 @@ public class RechargeOrderService extends AppBaseServiceV2<RechargeOrderEntity, 
             return ApiResponseUtil.getApiResponseFailure("订单不存在");
         }
 
+        // 如果订单状态已经是 PAID，直接返回，不再查询微信支付状态
+        if ("PAID".equals(order.getStatus())) {
+            log.info("订单状态已为 PAID，直接返回: orderId={}", orderId);
+            Map<String, Object> result = new HashMap<>();
+            result.put("orderId", orderId);
+            result.put("status", order.getStatus());
+            result.put("tradeState", "SUCCESS");
+            return ApiResponseUtil.getApiResponseSuccess(result);
+        }
+
         // 强制查询微信支付状态，确保状态同步
         WechatPayV3Client.QueryOrderResult queryResult = wechatPayV3Client.queryOrderByOutTradeNo(orderId);
         String tradeState = queryResult.getTradeState() != null ? queryResult.getTradeState() : queryResult.getError();
@@ -145,10 +155,17 @@ public class RechargeOrderService extends AppBaseServiceV2<RechargeOrderEntity, 
         // 映射订单状态
         String mappedStatus = mapTradeStateToOrderStatus(tradeState);
 
+        // 打印状态信息，便于调试
+        log.info("订单状态查询: orderId={}, 当前状态={}, 微信支付状态={}, 映射后状态={}", 
+                orderId, order.getStatus(), tradeState, mappedStatus);
+
         // 如果状态有变化，更新数据库
         if (!mappedStatus.equals(order.getStatus())) {
             Long paidTime = "PAID".equals(mappedStatus) ? System.currentTimeMillis() : null;
+            log.info("更新订单状态: orderId={}, 从{}更新为{}", orderId, order.getStatus(), mappedStatus);
             mapper.updateStatus(orderId, mappedStatus, System.currentTimeMillis(), paidTime);
+        } else {
+            log.info("订单状态未变化: orderId={}, 状态={}", orderId, order.getStatus());
         }
 
         Map<String, Object> result = new HashMap<>();
