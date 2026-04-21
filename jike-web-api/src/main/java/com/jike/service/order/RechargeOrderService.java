@@ -224,7 +224,7 @@ public class RechargeOrderService extends AppBaseServiceV2<RechargeOrderEntity, 
      * 将微信交易状态映射为订单状态
      */
     private String mapTradeStateToOrderStatus(String tradeState) {
-        if (tradeState == null) return "CREATED";
+        if (tradeState == null || tradeState.isEmpty()) return "CREATED";
         return switch (tradeState) {
             case "SUCCESS", "REFUND" -> "PAID";
             case "NOTPAY", "USERPAYING", "PAYERROR" -> "CREATED";

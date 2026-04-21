@@ -109,11 +109,15 @@ public class WechatPayV3Client {
                 java.net.URLEncoder.encode(weixinConfig.getMchId(), StandardCharsets.UTF_8));
 
             String response = request("GET", urlPath, null);
+            log.info("查询微信订单响应: {}", response);
             // 解析 trade_state
             if (response.contains("\"trade_state\"")) {
                 int start = response.indexOf("\"trade_state\"") + 14;
                 int end = response.indexOf("\"", start);
                 result.setTradeState(response.substring(start, end));
+            } else {
+                log.warn("响应中未包含 trade_state: {}", response);
+                result.setError("响应中未包含 trade_state");
             }
         } catch (Exception e) {
             log.error("查询微信订单失败", e);

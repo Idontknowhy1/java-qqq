@@ -99,6 +99,8 @@ public class WxPayNotifyController extends ApiBaseControllerV2<WxPayNotifyEntity
             // 处理充值订单
             if (attach.contains("RECHARGE_POINTS")) {
                 try {
+                    // 打印 attach 内容，便于调试
+                    log.info("处理充值订单回调, attach={}", attach);
                     JSONObject attachJson = JSON.parseObject(attach);
                     String userId = attachJson.getString("userId");
                     String packageId = attachJson.getString("packageId");
@@ -108,7 +110,7 @@ public class WxPayNotifyController extends ApiBaseControllerV2<WxPayNotifyEntity
                     log.info("处理充值订单回调成功: orderNo={}, tradeState={}", orderNo, tradeState);
                     return successResponse();
                 } catch (Exception e) {
-                    log.error("处理充值订单回调失败: orderNo={}", orderNo, e);
+                    log.error("处理充值订单回调失败: orderNo={}, attach={}", orderNo, attach, e);
                     return failureResponse("处理充值订单失败");
                 }
             }
