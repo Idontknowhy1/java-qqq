@@ -117,6 +117,7 @@ public class WechatPayV3Client {
             }
         } catch (Exception e) {
             log.error("查询微信订单失败", e);
+            result.setError(e.getMessage());
         }
         return result;
     }
