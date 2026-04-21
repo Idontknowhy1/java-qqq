@@ -9,6 +9,7 @@ secret:
 
 weixin:
   # 商户API私钥路径
-  privateKeyPath: "/Users/jjs/Documents/cers/jike/apiclient_key.pem"
+  # privateKeyPath: "/Users/jjs/Documents/cers/jike/apiclient_key.pem"
+  privateKeyPath: "D:\\code\\yunyun\\积分\\java\\jike-web-api\\wxpay\\apiclient_key.pem"
   # 微信公钥路径（没用）
 #  publicKeyPath: "/Users/gaoruihou/Documents/Project/cer/weixin/wechatpay_7E2883D66DB77FA4B8972250151C024703A79ADA.pem"

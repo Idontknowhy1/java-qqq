@@ -332,6 +332,7 @@ public class WeiXinUtil {
         private String transcationId;
         private String error;
         private double price;
+        private String tradeState;
     }
 
     @Getter
@@ -339,6 +340,102 @@ public class WeiXinUtil {
     public class AppRefundResult {
         private boolean success;
         private String extra;
+    }
+
+    /**
+     * Native扫码支付订单结果
+     */
+    @Getter
+    @Setter
+    public static class NativeOrderResult {
+        private boolean success;
+        private String codeUrl;
+        private String error;
+    }
+
+    /**
+     * 调用微信Native下单接口（扫码支付）
+     */
+    public NativeOrderResult createNativeOrder(String description, int amountFen, String outTradeNo, String attach) {
+        NativeOrderResult result = new NativeOrderResult();
+        if (config == null) {
+            result.setSuccess(false);
+            result.setError(createConfigError);
+            return result;
+        }
+
+        try {
+            // 使用 Native 服务
+            com.wechat.pay.java.service.payments.nativepay.NativePayService service =
+                    new com.wechat.pay.java.service.payments.nativepay.NativePayService.Builder().config(config).build();
+
+            com.wechat.pay.java.service.payments.nativepay.model.PrepayRequest request =
+                    new com.wechat.pay.java.service.payments.nativepay.model.PrepayRequest();
+
+            // 设置金额（分）
+            com.wechat.pay.java.service.payments.nativepay.model.Amount amount =
+                    new com.wechat.pay.java.service.payments.nativepay.model.Amount();
+            amount.setTotal(amountFen);
+            amount.setCurrency("CNY");
+            request.setAmount(amount);
+
+            request.setAppid(weixinConfig.getOfficeAppId());
+            request.setMchid(weixinConfig.getMchId());
+            request.setDescription(description);
+            request.setNotifyUrl(weixinConfig.getNotifyUrl());
+            request.setOutTradeNo(outTradeNo);
+            request.setAttach(attach);
+
+            // 调用下单方法
+            com.wechat.pay.java.service.payments.nativepay.model.PrepayResponse response = service.prepay(request);
+
+            result.setSuccess(true);
+            result.setCodeUrl(response.getCodeUrl());
+
+        } catch (ServiceException e) {
+            log.error("创建微信Native订单失败: {}", e.getLocalizedMessage(), e);
+            result.setSuccess(false);
+            result.setError(e.getLocalizedMessage());
+        } catch (Exception e) {
+            log.error("创建微信Native订单异常: {}", e.getLocalizedMessage(), e);
+            result.setSuccess(false);
+            result.setError(e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    /**
+     * 检查订单支付状态
+     */
+    public CheckOrderResult checkNativeOrder(String outTradeNo) {
+        CheckOrderResult checkOrderResult = new CheckOrderResult();
+
+        try {
+            com.wechat.pay.java.service.payments.nativepay.NativePayService service =
+                    new com.wechat.pay.java.service.payments.nativepay.NativePayService.Builder().config(config).build();
+
+            com.wechat.pay.java.service.payments.nativepay.model.QueryOrderByOutTradeNoRequest queryRequest =
+                    new com.wechat.pay.java.service.payments.nativepay.model.QueryOrderByOutTradeNoRequest();
+            queryRequest.setMchid(weixinConfig.getMchId());
+            queryRequest.setOutTradeNo(outTradeNo);
+
+            Transaction result = service.queryOrderByOutTradeNo(queryRequest);
+            String tradeState = result.getTradeState().name();
+
+            if (outTradeNo.equals(result.getOutTradeNo()) && "SUCCESS".equals(tradeState)) {
+                checkOrderResult.setPayed(true);
+                checkOrderResult.setTranscationId(result.getTransactionId());
+                checkOrderResult.setPrice(result.getAmount().getPayerTotal() / 100.0);
+            }
+            checkOrderResult.setTradeState(tradeState);
+
+        } catch (ServiceException e) {
+            log.error("查询微信订单失败: {}", e.getLocalizedMessage(), e);
+            checkOrderResult.setError(e.getLocalizedMessage());
+        }
+
+        return checkOrderResult;
     }
 
     @Data

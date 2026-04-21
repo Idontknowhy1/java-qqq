@@ -44,17 +44,17 @@ public class WeiXinConfig {
             this.apiV3Key = System.getenv("apiV3Key");
 
         } else {
-            this.notifyUrl = "https://api-v2-test.jikeing.com/wechat/notify/pay-result";
+            this.notifyUrl = "https://api.jikeing.com/v1/wechat/pay-notify";
 
-            this.officeAppId = "wxd993834a5fc463e8";
-            this.officeSecret = "5b2698a5b148d8addc5a4713c96d28f2";
+            this.officeAppId = "wxfb3fa270b1e2ae9e";
+            this.officeSecret = "5b2698a5b148d8addc5a4713c96d28f2";  // TODO: 请确认是否需要修改
             this.officeToken = "jike666";
             this.officeAesKey = "7xUZM43ZP5OSJ17FrrSDWyUVfRy7r72xUfOAkI9UrGY";
 
-            this.mchId = "1676428333";
-            this.privateKeyPath = "/Users/jjs/Documents/cers/jike/apiclient_key.pem";
-            this.mchSerialNo = "6A6BC3FA8D75613F27DFC42FE459B5A8932A9304";
-            this.apiV3Key = "MHHWHBXvQ3pyPP6H8rhk5EgdreGpfjyh";
+            this.mchId = "1110510960";
+            this.privateKeyPath = "d:\\code\\yunyun\\积分\\java\\jike-web-api\\wxpay\\apiclient_key.pem";
+            this.mchSerialNo = "471C385E81067C9B7ACD2F32DA07229E2DB97571";
+            this.apiV3Key = "7a2f9d4c1e8b3c6k5s9v2x7r4t1y6u8p";
 
         }
     }

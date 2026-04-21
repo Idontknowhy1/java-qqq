@@ -1,10 +1,12 @@
 package com.jike.controller.notify;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jike.constant.AppConst;
+import com.jike.service.order.RechargeOrderService;
 import com.jike.service.order.OrderService;
 import com.jike.vendor.WeiXinAesUtil;
 import com.jike.vendor.WeiXinConfig;
@@ -51,6 +53,8 @@ public class WxPayNotifyController extends ApiBaseControllerV2<WxPayNotifyEntity
     WeiXinConfig weiXinConfig;
     @Autowired
     OrderService orderService;
+    @Autowired
+    RechargeOrderService rechargeOrderService;
 
     @PostMapping("/pay-result")
     @ResponseNoSecurity
@@ -72,9 +76,18 @@ public class WxPayNotifyController extends ApiBaseControllerV2<WxPayNotifyEntity
                             ciphertext);
             HashMap notifyBody = JSON.parseObject(plainText, HashMap.class);
 
-            // 验签与解密
+            // 解析 attach 判断订单类型
+            String attach = notifyBody.get("attach") != null ? notifyBody.get("attach").toString() : "";
+            String tradeState = notifyBody.get("trade_state") != null ? notifyBody.get("trade_state").toString() : "";
+
+            // 从解密数据中获取订单号和交易ID
+            if (notifyBody.get("transaction_id") == null || notifyBody.get("out_trade_no") == null) {
+                log.info("---wxNotify 解密后数据不完整 \n      body = "+body);
+                return failureResponse("解密后数据不完整");
+            }
             String orderNo = notifyBody.get("out_trade_no").toString();
             String transactionId = notifyBody.get("transaction_id").toString();
+
 
             // 推送记录入库
             WxPayNotifyEntity notify = new WxPayNotifyEntity();
@@ -83,12 +96,24 @@ public class WxPayNotifyController extends ApiBaseControllerV2<WxPayNotifyEntity
             notify.setBody(plainText);
             service.save(notify);
 
-            // 从解密数据中获取订单号
-            if (notifyBody.get("transaction_id") == null || notifyBody.get("out_trade_no") == null) {
-                log.info("---wxNotify 解密后数据不完整 \n      body = "+body);
-                return failureResponse("解密后数据不完整");
+            // 处理充值订单
+            if (attach.contains("RECHARGE_POINTS")) {
+                try {
+                    JSONObject attachJson = JSON.parseObject(attach);
+                    String userId = attachJson.getString("userId");
+                    String packageId = attachJson.getString("packageId");
+                    int points = attachJson.getIntValue("points");
+
+                    rechargeOrderService.handlePayNotify(orderNo, tradeState, userId, packageId, points);
+                    log.info("处理充值订单回调成功: orderNo={}, tradeState={}", orderNo, tradeState);
+                    return successResponse();
+                } catch (Exception e) {
+                    log.error("处理充值订单回调失败: orderNo={}", orderNo, e);
+                    return failureResponse("处理充值订单失败");
+                }
             }
 
+            // 原有的订单处理逻辑
             if (orderService.checkOrder(orderNo).getCode().equals(ApiResponseEnum.SUCCESS.getCode())) {
                 return successResponse();
             } else {
