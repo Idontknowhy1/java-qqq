@@ -121,7 +121,7 @@ public class OrderService extends AppBaseServiceV2<OrderEntity, OrderVO,OrderDTO
 
         WeiXinUtil.CheckOrderResult checkOrderResult = weiXinUtil.jsApiService.checkOrder(orderNo);
         if (checkOrderResult.isPayed()) {
-            order.setStatus(2);
+            order.setStatus(1); // 修改为1表示已支付，与OrderEntity注释一致
             order.setOutTradeNo(checkOrderResult.getTranscationId());
             order.setPayPrice((float) (checkOrderResult.getPrice()));
             if (!order.isAssigned()) {

@@ -122,7 +122,7 @@ const OrderList: React.FC<IProps> = (props) => {
             value={fieldValue}
             options={[
               { value: 0, label: "待支付" },
-              { value: 2, label: "已支付" },
+              { value: 1, label: "已支付" },
               { value: 3, label: "已退款" },
             ]}
             onChange={(newValue) => {
@@ -153,7 +153,7 @@ const OrderList: React.FC<IProps> = (props) => {
       title: "微信单号",
       dataIndex: "outTradeNo",
       key: "outTradeNo",
-      hideInTable: selectStatus < 2,
+      hideInTable: selectStatus < 1,
     },
     {
       title: "状态",
@@ -163,7 +163,7 @@ const OrderList: React.FC<IProps> = (props) => {
       render: (value) => {
         if (value === 0) {
           return <Tag color="orange">待支付</Tag>;
-        } else if (value === 2) {
+        } else if (value === 1) {
           return <Tag color="green">已支付</Tag>;
         } else if (value === 3) {
           return <Tag color="red">已退款</Tag>;
@@ -182,7 +182,7 @@ const OrderList: React.FC<IProps> = (props) => {
       dataIndex: "payTime",
       key: "payTime",
       hideInSearch: true,
-      hideInTable: selectStatus < 2,
+      hideInTable: selectStatus < 1,
     },
     {
       title: "支付价格",

@@ -52,7 +52,7 @@ public class OrderService extends AppBaseServiceV2<OrderEntity, OrderVO,OrderDTO
         List<OrderVO> list = getList(new QueryWrapper<OrderEntity>().lambda()
                 .eq(userEntity != null, OrderEntity::getUserId, userEntity == null ? 0 : userEntity.getId())
                 .eq(!orderNo.isEmpty(), OrderEntity::getOrderNo, orderNo)
-                .eq(OrderEntity::getStatus, 2)
+                .eq(OrderEntity::getStatus, 1)
                 .orderBy(true, false, OrderEntity::getCreateTime));
 
         for (OrderVO vo : list) {
