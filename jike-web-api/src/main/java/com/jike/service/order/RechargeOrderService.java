@@ -37,10 +37,10 @@ public class RechargeOrderService extends AppBaseServiceV2<RechargeOrderEntity, 
     private static final Map<String, int[]> RECHARGE_PACKAGES = new LinkedHashMap<>();
 
     static {
-        RECHARGE_PACKAGES.put("pkg_500", new int[]{500, 1});
-        RECHARGE_PACKAGES.put("pkg_2000", new int[]{2000, 1});
-        RECHARGE_PACKAGES.put("pkg_5000", new int[]{5000, 1});
-        RECHARGE_PACKAGES.put("pkg_12000", new int[]{12000, 1});
+        RECHARGE_PACKAGES.put("pkg_500", new int[]{500, 990});    // 9.9元
+        RECHARGE_PACKAGES.put("pkg_2000", new int[]{2000, 2990});  // 29.9元
+        RECHARGE_PACKAGES.put("pkg_5000", new int[]{5000, 6990});  // 69.9元
+        RECHARGE_PACKAGES.put("pkg_12000", new int[]{12000, 15990}); // 159.9元
     }
 
     public RechargeOrderService(RechargeOrderMapper mapper, PointsLedgerMapper pointsLedgerMapper, WechatPayV3Client wechatPayV3Client) {
